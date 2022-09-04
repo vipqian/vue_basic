@@ -1,0 +1,60 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 12:50:12
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-04 13:25:00
+ * @Description: file content
+ * @FilePath: /vue_basic/7事件处理/3键盘事件.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 
+            键盘事假
+            1、常用的按键别名
+                回车 ==> enter
+                删除 ==> delete （捕获删除和退格键）
+                退出 ==> esc
+                换行 ==> tab （特殊，必须配合keydown使用）
+                上 ==> up
+                下 ==> down
+                左 ==> left
+                右 ==> right
+            2、vue未提供别名的按键，可以使用按键的原始的key值去绑定，但是要注意转化kebab-case （短横线命名）
+            3、系统修饰键（用法特殊）：ctrl、alt、shirt、meta
+                配合keyup使用：按下修饰键的同时，再按下其他的按键，释放其他的按键，事件才会被触发
+                配合keydown使用，事件正常使用
+            4、也可以使用keyCode去指定具体的按键（不推荐）
+            5、Vue.cofig.keyCodes.自定义键名 = 键码  可以去定制按键别名
+         -->
+        <!-- <input type="text" placeholder="按下回车进行输入" @keyup.enter="showInfo"> -->
+        <!-- 使用ctrl + y才能触发 -->
+        <input type="text" placeholder="按下回车进行输入" @keydown.ctrl.y="showInfo">
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+
+                }
+            },
+            methods: {
+                showInfo(e){
+                    console.log(e.keyCode)
+                    console.log(e.key)
+                    console.log('123')
+                }
+            }
+        }).$mount("#root")
+    </script>    
+</body>
+</html>
