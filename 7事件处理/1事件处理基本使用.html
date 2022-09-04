@@ -1,0 +1,59 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-04 09:38:56
+ * @Description: file content
+ * @FilePath: /vue_basic/7事件处理/1事件处理基本使用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 
+            事件的基本使用：
+                1、使用v-on:xxx或者@xxx绑定事件，其中xxx是事件的名称
+                2、事件的回调需要配置再methods对象中，最重会在vm上
+                3、methods配置函数时，不要使用箭头函数，否则this不是vm的
+                4、methods配置函数时，都是被vue所管理的函数，this指向的是vm或组件实例对象
+                5、@click='demo'和v-no:click='demo(#event)'效果是一样的，后者可以传参
+         -->
+        <h1>你好，{{name}}</h1>
+        <!-- 正常写法
+        <button v-on:click="showData1">client1 不传参</button>
+        <button v-on:click="showData2($event,99)">client2 传参</button> -->
+        <!-- 简单写法 -->
+        <button @click="showData1">client1 不传参</button>
+        <button @click="showData2($event,99)">client2 传参</button>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    name: '欢迎来到我的世界'
+                }
+            },
+            methods: {
+                showData1(event){
+                    console.log(event.target.innerText)
+                    console.log(this) //此处的this位vm
+                    alert('123456')
+                },
+                showData2(envent, number){
+                    console.log(event.target.innerText)
+                    console.log(number)
+                    console.log(this) //此处的this位vm
+                    alert('123456')
+                }
+            }
+        }).$mount("#root")
+    </script>
+</body>
+</html>

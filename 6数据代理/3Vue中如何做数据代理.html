@@ -1,0 +1,43 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:33:12
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-04 02:52:10
+ * @Description: file content
+ * @FilePath: /vue_basic/6数据代理/3Vue中如何做数据代理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- 
+        1、vue中的数据代理：
+            通过vm的对象(_data)代理data中的对象（读、写）
+        2、vue数据代理的好处
+            更加方便操作data中的数据
+        3、基本原理
+            通过Object.defineProperty把data中所有的属性添加到vm中
+            为每一个添加到vm的数据都指定了getter/setter
+            在getter/setter中读写data中的数据
+     -->
+    <div id="root">
+        <h1>学校 {{name}}</h1>
+        <h1>地址 {{addr}}</h1>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data: {
+                name: '天坛学院',
+                addr: '幸福路12号'
+            }
+        }).$mount('#root')
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-03 23:46:23
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-04 00:11:18
+ * @Description: file content
+ * @FilePath: /vue_basic/2模板语法/模板语法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- vue语法2大类
+    1、插值语法
+        功能：用于解析标签体内的内容
+        写法：{{xxx}}，xxx为js表达式，且可以读取到data内的属性
+    2、指令语法
+        功能：用于解析标签（包括表情属性、标签体内容、绑定事件...）
+        举例：v-bind:href="xxx" 或简写为 :href="xxx" xxx要写js表达式，且可以读取到data内的属性
+        备注：Vue中有很多指令语法都是v-xxx 此处我们只是拿v-bind举个例子 -->
+    <div id="root">
+        <h1>插值语法</h1>
+        <h1>你好，{{name}}</h1>
+        <hr/>
+        <h1>指令语法</h1>
+        <a v-bind:href="scholl.url">{{scholl.name}}</a>
+        <a :href="scholl.url">{{scholl.name}}</a>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#root",
+            data: {
+                name: 'jack',
+                scholl: {
+                    name: 'school',
+                    url: 'http://www.baidu.com',
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>

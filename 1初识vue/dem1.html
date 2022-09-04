@@ -1,0 +1,51 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-03 22:45:37
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-03 23:43:09
+ * @Description: file content
+ * @FilePath: /vue_basic/1初识vue/dem1.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识vue</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 1、想让vue工资必须创建一个vue实例，且要传入一个配置对象；
+    2、root中的代码依然符合html的规范，只不过混入了一些特殊的vue语法；
+    3、root容器中的代码被称为vue模板 
+    4、vue实例和容器是一一对应关系
+    5、真是的开发过程中，只有一个vue实例，配合着组件一起使用
+    6、{{xxx}}中的xxx必须写表达式，且xxx可以自动获取到data中所有的属性
+    7、一旦data中的数据发生变化，模板中用到该数据的地方也会刷新。
+    注意区分js表达式和js代码
+        表达式： 一个表达式会生成一个只，可以放过到任何需要的地方
+            1、a
+            2、a+b
+            3、demo(1)
+            4、x === y ? 'a' != 'b'
+        代码
+            1、if(){}
+            2、for(){}
+    -->
+    <!-- 第一步准备好一个容器 -->
+    <div id="root">
+        <h1>hello {{name}}</h1>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+
+        const x = new Vue({
+            el: '#root', //制定vue实例为那个容器服务。通常为css实例
+            data: {  //data用于存储数据，供el指定的容器使用，值可以暂时写成一个对象
+                name: 'word'
+            }
+        })
+    </script>
+</body>
+</html>

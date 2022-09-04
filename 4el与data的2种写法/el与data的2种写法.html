@@ -1,0 +1,75 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 00:36:13
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-04 00:55:36
+ * @Description: file content
+ * @FilePath: /vue_basic/4el与data的2种写法/el与data的2种写法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- el与data的2种写法
+    1.el的两种写法
+        1、new Vue的时候配置el属性
+        2、先创建vue实例，然后通过v.$mount的方式制定el的值
+    2.data的两种写法
+        1、对象式
+        2、函数式
+        如何选择：目前那种方法都可以，以后学些到组件时，必须使用函数式，否则会出错
+    3、一个重要原则
+        由vue管理函数，一定不要写箭头函数，一旦写了箭头函数，this就不是vue的实例了 -->
+
+    <div id="root">
+        <h1>{{name}}</h1>
+    </div>
+    <script type="text/javascript">
+        // el的两种写法
+        /*
+        const x = new Vue({
+            // el: '#root', // 第一种写法
+            data: {
+                name: 'hello word'
+            }
+            
+        })
+        x.$mount('#root') // 第二种写法
+        */
+        // data的两种写法
+        const x = new Vue({
+            //data的第一种写法：对象式
+            /*
+            data:{
+                name: 'hello word'
+            }
+            */
+           //data的第二种写法：函数式
+           /* 
+           data:function(){
+                return {
+                    name: 'hello word'
+                }
+            }
+            */
+            // 也可以写成
+            data(){
+                return {
+                    name: 'hello word'
+                }
+            }
+           
+        }).$mount('#root')
+         
+         
+
+    </script>
+</body>
+</html>
