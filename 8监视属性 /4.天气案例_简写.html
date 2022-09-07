@@ -1,0 +1,87 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-07 20:58:49
+ * @Description: file content
+ * @FilePath: /vue_basic/8监视属性 /4.天气案例_简写.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    
+    <div id="root">
+        <h1>今天的天气很{{info}}</h1>
+        <button @click="changeWeather">切换天气</button>
+        <hr>
+        <h1>mumber中a的值为{{number.a}}</h1>
+        <button @click="number.a++">点击a++</button>
+        <h1>mumber中a的值为{{number.b}}</h1>
+        <button @click="number.b++">点击b++</button>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    isHot: true,
+                    count: 1,
+                    number: {
+                        a: 1,
+                        b: 2
+                    }
+                }
+            },
+            computed: {
+                info(){
+                    return this.isHot? '炎热': '凉爽'
+                }
+            },
+            methods: {
+                changeWeather(){
+                    this.isHot = !this.isHot
+                    this.count+=1
+                }
+            },
+            // 知道要监听那个元素一般使用这个方法
+            watch: {
+                // 标准写法
+                /*
+                isHot:{
+                    // immediate: true, 
+                    handler(newValue, oldValue){
+                        console.log("isHot被修改了", newValue, oldValue)
+                    }
+                },
+                */
+                // 简单写法
+                isHot(newValue, oldValue){
+                    console.log("isHot被修改了", newValue, oldValue)
+                },
+                // 监视多级的单个属性
+                "number.a": {
+                    immediate: true, 
+                    handler(){
+                        console.log('number中a的值发生了变化')
+                    },
+                },
+                // 监听多级目录中的所有属性
+                number:{
+                    deep: true,
+                    handler(newValue, oldValue){
+                        console.log('number发生了改变', newValue, oldValue)
+                    }
+                }
+            },
+
+        }).$mount("#root")
+        
+    </script>    
+</body>
+</html>
