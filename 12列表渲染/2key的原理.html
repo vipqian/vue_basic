@@ -1,0 +1,74 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-08 23:18:03
+ * @Description: file content
+ * @FilePath: /vue_basic/12列表渲染/2key的原理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="root">
+        <!--  
+            面试题：react、Vue中key的作用是什么？（key的原理）
+            1、虚拟DOM中可以的作用：
+                key是虚拟对象中的标识，当状态中的key发生变化时，vue会根据【新的数据】生成【新的虚拟DOM】
+                随后vue进行【新的虚拟DOM】与【旧虚拟DOM】差异对比，对比规则如下：
+            2、对比规则
+                旧虚拟DOM找到了与新虚拟DOM相同的key
+                    若虚拟DOM中没有变化，直接使用之前的真实DOM
+                    若虚拟DOM中发生了变化，则生成新的真实DOM，随后替换掉页面中的真实DOM
+                旧虚拟DOM未找到与新虚拟DOM相同的key
+                    创建真实的DOM，随后渲染页面
+            3、用index做为key可能引发是问题
+                若对数据进行逆向添加，逆向删除等，破坏数据顺序的操作，
+                    会产生没有必要的真实DOM更新 ==> 页面效果没问题，效率会降低
+                如果结构中还包含输入类的DOM
+                    会产生错误的DOM更新 ==> 页面效果有问题
+            4、开发中如何选择key
+                最好每条数据都有唯一标识的key，比如ID，手机号、身份证等唯一标识
+                如果不存在对数据的逆向添加、删除等过破坏顺序操作，仅用于渲染列表用于展示。使用index做为key是没有问题的
+
+         -->
+       
+        <!-- 遍历数组 -->
+        <h2>人员列表（遍历数组）</h2>
+        <button @click.once="addPerson">点击添加老刘</button>
+        <ul>
+            <li v-for="person in personList" :key="person.id">
+                {{person.name}}-{{person.age}}
+                <input type="text" name="" id="">
+            </li>
+        </ul>
+
+
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    personList: [
+                        {id:'001', name:'张三',age: 18},
+                        {id:'002', name:'李四',age: 19},
+                        {id:'003', name:'王五',age: 20}
+                    ]
+                }
+            },
+            methods: {
+                addPerson(){
+                    const p = {id:'004', name:'老刘',age: 40}
+                    this.personList.unshift(p)
+                }
+            },
+        }).$mount("#root")
+    </script>    
+</body>
+</html>
