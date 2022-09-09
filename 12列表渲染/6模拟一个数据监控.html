@@ -1,0 +1,47 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-09 21:41:38
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-09 21:53:55
+ * @Description: file content
+ * @FilePath: /vue_basic/12列表渲染/6模拟一个数据监控.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let data = {
+            name: '张三',
+            age: 18
+        }
+
+        // 创建一个监视对象，用于监视data中的属性变化
+        const obs = new Observer(data);
+        
+        let vm ={}
+        vm._data = data = obs 
+        // 汇总对象中所有的属性进行汇总
+        function Observer(obj) {
+            const keys = Object.keys(obj)
+            console.log(keys)
+            // 遍历数组
+            keys.forEach((k)=>{
+                Object.defineProperty(this, k, {
+                    get(){
+                        return obj[k]
+                    },
+                    set(val){
+                        return obj[k] =val
+                    }
+                })
+            })
+        }
+    </script>
+</body>
+</html>

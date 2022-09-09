@@ -1,0 +1,56 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-09 22:19:45
+ * @Description: file content
+ * @FilePath: /vue_basic/12列表渲染/8Vue.set的使用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="root">
+        <h3>学校的名称：{{name}}</h3>
+        <h3>学校的地址：{{addr}}</h3>
+        <hr>
+        <h3>学生姓名：{{studets.name}}</h3>
+        <h3>学生性别：{{studets.sex}}</h3>
+        <h3>学生的真实年龄：{{studets.age.rAge}}，学生的对外年龄{{studets.age.sAge}}</h3>
+        <h3>学生的朋友们</h3>
+        <ul>
+            <li v-for="(firend, index) in studets.firends" :key="index">
+                {{firend.name}}--{{firend.age}}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    name: "fei",
+                    addr: 'beijing',
+                    studets: {
+                        name: 'tom',
+                        sex: '男',
+                        age: {
+                            rAge: 40,
+                            sAge: 29
+                        },
+                        firends:[
+                            {name: 'jerry', age: 18},
+                            {name: 'tony', age: 19}
+                        ]
+                    }
+                }
+            }
+        }).$mount("#root")
+    </script>    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-09 21:58:51
+ * @Description: file content
+ * @FilePath: /vue_basic/12列表渲染/7监控数据的原理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    name: "fei",
+                    addr: 'beijing',
+                    studets: {
+                        name: 'tom',
+                        age: {
+                            rAge: 40,
+                            sAge: 29
+                        },
+                        firends:[
+                            {name: 'jerry', agge: 18}
+                        ]
+                    }
+                }
+            }
+        }).$mount("#root")
+    </script>    
+</body>
+</html>

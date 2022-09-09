@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-04 02:59:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-08 22:41:26
+ * @LastEditTime: 2022-09-08 23:39:36
  * @Description: file content
  * @FilePath: /vue_basic/12列表渲染/1基本列表.html
 -->
@@ -26,7 +26,7 @@
         <!-- 遍历数组 -->
         <h2>人员列表（遍历数组）</h2>
         <ul>
-            <li v-for="person in personList" ::key="person.id">
+            <li v-for="person in personList" :key="person.id">
                 {{person.name}}-{{person.age}}
             </li>
         </ul>
