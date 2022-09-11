@@ -2,9 +2,9 @@
  * @Author: wangyunfei
  * @Date: 2022-09-04 02:59:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-11 10:02:45
+ * @LastEditTime: 2022-09-11 10:12:02
  * @Description: file content
- * @FilePath: /vue_basic/12列表渲染/8Vue.set的使用.html
+ * @FilePath: /vue_basic/12列表渲染/9监控数据的原理_数组.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +28,12 @@
         <ul>
             <li v-for="(firend, index) in studets.firends" :key="index">
                 {{firend.name}}--{{firend.age}}
+                <h4>爱好</h4>
+                <ul>
+                    <li v-for="(h, index) in studets.hoddy" :key="index">
+                        {{h}}
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -44,6 +50,7 @@
                             rAge: 40,
                             sAge: 29
                         },
+                        hoddy: ['抽烟', '喝酒', '烫头'],
                         firends:[
                             {name: 'jerry', age: 18},
                             {name: 'tony', age: 19}

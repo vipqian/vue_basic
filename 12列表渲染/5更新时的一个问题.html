@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-04 02:59:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-09 21:22:04
+ * @LastEditTime: 2022-09-11 10:22:45
  * @Description: file content
  * @FilePath: /vue_basic/12列表渲染/5更新时的一个问题.html
 -->
@@ -44,9 +44,11 @@
                     // this.personList[0]['name'] = '马老师'        //有效修改
                     // this.personList[0]['agx'] = '男'     //有效修改
                     // this.personList[0]['age'] = 50       //有效修改
-                    
+
                     //无效修改
-                    this.personList[0] = {id:'001', name:'马老师',age: 50, agx:'男'}  
+                    // this.personList[0] = {id:'001', name:'马老师',age: 50, agx:'男'}  
+                    // 有效的修改该
+                    this.personList.splice(0,1,{id:'001', name:'马老师',age: 50, agx:'男'})
                 }
             },
             

@@ -1,0 +1,98 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-11 11:31:14
+ * @Description: file content
+ * @FilePath: /vue_basic/12列表渲染/10总结监控数据.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- 
+        Vue监测数据原理
+        1、vue监测data所有层级的数据
+        2、如果监测数据中的对象？
+            通过setter监测，且要要new vue中传入要监测的数据
+                对象中后添加的属性，vue默认不做响应数据处理
+                如果需要添加属性，需要使用下方api
+                    Vue.set(target, propertName/index, value)或者vm.$set(target, propertName/index, value)
+        3.如果监测数组中的数据
+            通过包裹数据更新元素的方法，本质上做了两件事
+                调用原生的方法对数据进行更新
+                重新解析模板，对页面进行更新
+        4、在vue中改变数组中某一个元素的的方式：
+            使用api：push()，pop()，shift()，unshift()，splice()，sort()，reverse()
+            使用vue.set或者vm.$set
+        特别注意：
+            vue.set或者vm.$set不能给vm或vm根数据添加属性
+     -->
+    <div id="root">
+        <h2>学生信息</h2>
+        <button v-once @click="studets.age++">点击后年龄加1</button> </br>
+        <button @click="addAgx">点击添加属性，默认值为男</button><br>
+        <button v-once @click="addFirend">在列表首位添加一个朋友</button><br>
+        <button v-once @click="changeNname">修改第一个朋友的名字为张三</button><br>
+        <button @click="addHoddy">添加一个爱好</button><br>
+        <button @click="changeHoddy">修改第一个爱好为开车</button><br>
+        
+        <h3>学生姓名：{{studets.name}}</h3>
+        <h3 v-if="studets.agx">学生性别：{{studets.agx}}</h3>
+        <h3>学生的真实年龄：{{studets.age}}</h3>
+        <h3>学生的朋友们</h3>
+        <ul>
+            <li v-for="(firend, index) in studets.firends" :key="index">
+                {{firend.name}}--{{firend.age}}
+            </li>
+        </ul>
+        <h4>爱好</h4>
+        <ul>
+            <li v-for="(h, index) in studets.hoddy" :key="index">
+                {{h}}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    studets: {
+                        name: 'tom',
+                        sex: '男',
+                        age: 18,
+                        hoddy: ['抽烟', '喝酒', '烫头'],
+                        firends:[
+                            {name: 'jerry', age: 18},
+                            {name: 'tony', age: 19}
+                        ]
+                    }
+                }
+            },
+            methods: {
+                addAgx(){
+                    this.$set(this.studets, 'agx', '男')
+                },
+                addFirend(){
+                    this.studets.firends.unshift({name: '韩梅梅', age: 20})
+                },
+                changeNname(){
+                    this.$set(this.studets.firends[0], 'name', '张三')
+                },
+                addHoddy(){
+                    this.studets.hoddy.push('篮球')
+                },
+                changeHoddy(){
+                    this.studets.hoddy.splice(0,1,'开车')
+                }
+            },
+        }).$mount("#root")
+    </script>    
+</body>
+</html>
