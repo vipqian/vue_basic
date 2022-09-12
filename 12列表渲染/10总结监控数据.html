@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-04 02:59:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-11 11:31:14
+ * @LastEditTime: 2022-09-12 13:37:46
  * @Description: file content
  * @FilePath: /vue_basic/12列表渲染/10总结监控数据.html
 -->
@@ -38,9 +38,9 @@
         <h2>学生信息</h2>
         <button v-once @click="studets.age++">点击后年龄加1</button> </br>
         <button @click="addAgx">点击添加属性，默认值为男</button><br>
-        <button v-once @click="addFirend">在列表首位添加一个朋友</button><br>
+        <button v-once @click.once="addFirend">在列表首位添加一个朋友</button><br>
         <button v-once @click="changeNname">修改第一个朋友的名字为张三</button><br>
-        <button @click="addHoddy">添加一个爱好</button><br>
+        <button @click.once="addHoddy">添加一个爱好</button><br>
         <button @click="changeHoddy">修改第一个爱好为开车</button><br>
         
         <h3>学生姓名：{{studets.name}}</h3>

@@ -1,0 +1,44 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-12 13:14:19
+ * @Description: file content
+ * @FilePath: /vue_basic/15内设指令/2v-html指令.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- 
+        v-html指令
+            作用：向其他节点中渲染包含html结构的内容
+            与插入语法的区别：
+                v-html会替换节点中的内容，{{xxx}}则不会
+                v-html可以识别html结构
+            严重注意 v-html有安全问题：
+                在网站上渲染任意动态的html是非常危险的，容易导致xss攻击
+                一定要在可信的内容上使用v-html，永远不要用在用户的提交上                
+     -->
+    <div id="root">
+        <h3>你好{{name}}</h3>
+        <h3 v-html="str"></h3>
+    </div>
+    <script type="text/javascript">
+        const vm = new Vue({
+            data(){
+                return {
+                    name: 'lilei',
+                    str: '<h3>good</h3>'
+                }
+            }
+        }).$mount("#root")
+    </script>    
+</body>
+</html>
