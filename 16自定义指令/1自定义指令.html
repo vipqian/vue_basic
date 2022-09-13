@@ -1,0 +1,91 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-13 21:06:37
+ * @Description: file content
+ * @FilePath: /vue_basic/16自定义指令/1自定义指令.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- 需求一：定义一个v-big指令和v-text的指令类似，将字体放大10倍
+    需求二：定义一个v-fbind指令和v-bind指令类型，但是可以让绑定的元素默认获取焦点 -->
+    <!-- 
+        自定义指令总结：
+            1、语法定义
+                1、局部指令：
+                    new Vue({
+                        directives: {指令名称：配置对象}   
+                    })
+                    或者
+                    new Vue({
+                        directives(){}  
+                    })
+                2、全局指令：
+                Vue.directive('指令名称'，配置对象) 或者 Vue.directive('指令名称'，回调函数)
+            2、配置中的三个常用的回调函数
+                bind：指令与元素成功绑定时进行调用
+                inserted：指定所在的元素被插入页面时被调用
+                update：指定所在的模板被重新解析时被调用
+            3、备注：
+                指令定义时不需添加v-，但是使用时需要添加v-
+                指令名称有多个单词，要写成kebab-case命名的方式，不要写成kebabCase的形式
+     -->
+    <div id="root">
+        <h2>当前的n值为:<span v-text="n"></span></h2>
+        <h2>放大10倍后的n值为:<span v-big="n"></span></h2>
+        <button @click="n++">点我n+1</button>
+        <br>
+        <input type="text" v-fbind="n">
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        // Vue.directive('fbind', {
+        //     bind(element, binding){
+        //         element.value = binding.value
+        //     },
+        //     inserted(element, binding){
+        //         element.focus()
+        //     },
+        //     update(element, binding){
+        //         element.value = binding.value
+        //         element.focus()
+        //     },
+        //         })
+        const vm = new Vue({
+            data(){
+                return {
+                    n: 1
+                }
+            },
+            directives: {
+                // 被调用的时机：1.指令与元素绑定成功（初始化）2、指令所在的模板被解析
+                big(element, binding){
+                    element.innerText = binding.value * 10
+                },
+                // 第二个需求
+                fbind:{
+                    bind(element, binding){
+                        element.value = binding.value
+                    },
+                    inserted(element, binding){
+                        element.focus()
+                    },
+                    update(element, binding){
+                        element.value = binding.value
+                        element.focus()
+                    },
+                }
+            }
+        }).$mount("#root")
+    </script>    
+</body>
+</html>

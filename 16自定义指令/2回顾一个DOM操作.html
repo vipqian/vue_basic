@@ -1,0 +1,33 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-12 14:35:10
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-13 20:56:04
+ * @Description: file content
+ * @FilePath: /vue_basic/16自定义指令/2回顾一个DOM操作.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点我添加一个input输入框</button>
+    <script type="text/javascript">
+        co
+        const btn = document.getElementById('btn')
+        btn.onclick = ()=>{
+            const input = document.createElement('input')
+            input.value = 99
+            input.onclick = ()=>{
+                alert(1)
+            }
+            document.body.appendChild(input)
+            input.focus()
+        }
+    </script>
+</body>
+</html>
