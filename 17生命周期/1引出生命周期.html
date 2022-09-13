@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-04 02:59:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-13 21:21:03
+ * @LastEditTime: 2022-09-13 21:56:40
  * @Description: file content
  * @FilePath: /vue_basic/17生命周期/1引出生命周期.html
 -->
@@ -16,8 +16,15 @@
     <script src="../js/vue.js" type="text/javascript"></script>
 </head>
 <body>
+    <!-- 
+        生命周期
+            1又名：生命周期回调函数、生命周期函数、生命周期钩子
+            2是什么：vue关键时刻帮我们调用的特定函数
+            3、生命周期的函数名称不能更改，但是函数的具体内容又程序员进行编写
+            4、生命周期函数中的this的指定为vm或组件实例对象
+     -->
     <div id="root">
-        <h3 style="{opacity: opcity;}">欢迎学习Vue</h3>
+        <h3 :style="{opacity: opcity}">欢迎学习Vue</h3>
     </div>
     <script type="text/javascript">
         const vm = new Vue({
@@ -25,8 +32,30 @@
                 return {
                     opcity: 1
                 }
-            }
+            },
+            // vue完成模板解析并初始化的DOM元素放入到页面（挂载完毕、只调用一次）执行mounted
+            mounted() {
+                setInterval(()=>{
+                    if(this.opcity <= 0){
+                        this.opcity = 1
+                    }
+                    else{
+                        this.opcity -= 0.01
+                    }
+                }, 16)
+            },
         }).$mount("#root")
+        // 通过外部的定时器实现（不推荐）
+        /*
+        setInterval(()=>{
+            if(vm.opcity <= 0){
+                vm.opcity = 1
+            }
+            else{
+                vm.opcity -= 0.01
+            }
+        }, 16)
+        */
     </script>    
 </body>
 </html>
