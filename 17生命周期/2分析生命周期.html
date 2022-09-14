@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-04 02:59:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-13 22:28:28
+ * @LastEditTime: 2022-09-14 21:58:41
  * @Description: file content
  * @FilePath: /vue_basic/17生命周期/2分析生命周期.html
 -->
@@ -19,6 +19,7 @@
     <div id="root">
         <h3>这时的n值为{{n}}</h3>
         <button @click="add">点我n+1</button>
+        <button @click="destroyClick">点我销毁vm</button>
     </div>
     <script type="text/javascript">
         new Vue({
@@ -27,9 +28,18 @@
                     n: 1
                 }
             },
+            // template:`
+            // <div>
+            //     <h3>这时的n值为{{n}}</h3>
+            //     <button @click="add">点我n+1</button>
+            // </div>
+            // `,            
             methods: {
                 add(){
                     this.n ++
+                },
+                destroyClick(){
+                    this.$destroy()
                 }
             },
             // 在初始化：生命周期、事假，但数据代理还未执行时调用，此时无法访问到data中的数据和methods中的方法
@@ -46,8 +56,22 @@
             },
             // 将内存中的虚拟DOM转换为真实DOM插入页面后被调用，此时页面是经过vue编译后的真实DOM，对DOM的操作均有效（尽量避免），至此初始化结束，一般在此开启定时器、发送网络请求、定义消息，绑定自定义事件、等初始化操作
             mounted() {
-                console.log('beforeMount')
-                debugger
+                console.log('mounted')
+            },
+            // 此时数据是新的，页面是旧的，即页面尚未和数据同步
+            beforeUpdate() {
+                console.log('beforeUpdate')
+            },
+            // 此时数据是新的，页面也是新的，即页面和数据同步完成
+            updated() {
+                console.log('updated')
+            },
+            // 此处vm中所有的：data methods、指令都能等都处于可用状态，马上要执行销毁了，一般在此处做的为关闭定时器、取消订阅消息和解绑自定义事件
+            beforeDestroy() {
+                console.log('beforeDestroy')
+            },
+            destroyed() {
+                console.log('destroyed')
             },
         }).$mount("#root")
     </script>    
