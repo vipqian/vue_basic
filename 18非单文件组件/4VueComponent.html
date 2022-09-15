@@ -1,0 +1,62 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-04 02:59:19
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-15 22:01:12
+ * @Description: file content
+ * @FilePath: /vue_basic/18非单文件组件/4VueComponent.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- 
+        关于VueComponent：
+            1、school组件本质上就是一个VueComponent的构造函数，且不是程序员构造的，是Vue.extend构造生成的
+
+            2、我们只需要写<school></school>或者<school/>标签时。Vue解析时会帮我们创建school的组件实例对象，即Vue帮我们写的 new VueComponent(option)
+
+            3、特别注意的是，每次调用Vue.extend,返回的都是一个全新的VueComponent！！！
+
+            4、关于this指向问题
+                在组件配置中
+                    data函数，methods中的函数。computed中的函数 它们指向的都是VueComponent的实例对象
+                在new Vue()配置中
+                    data函数，methods中的函数。computed中的函数 它们指向的都是Vue的实例对象
+            
+            5、VueComponent实例对象，简称为vc（也可称之为组价实例对象）
+                Vue实例对象简称为vm
+                
+     -->
+    <div id="root">
+        <school></school>
+    </div>
+    <script type="text/javascript">
+        const school = Vue.extend({
+            template: `
+            <div>
+                <h3>学校的名称{{name}}</h3>
+                <h3>学校的地址{{addr}}</h3>
+            </div>
+            `,
+            data() {
+                return {
+                    name: "尚硅谷",
+                    addr: "北京"
+                }
+            },
+        })
+        new Vue({
+            components: {
+                school
+            }
+        }).$mount("#root")
+    </script>    
+</body>
+</html>
