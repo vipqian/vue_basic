@@ -8,6 +8,7 @@
   - [vue.config.js配置文件](#vueconfigjs%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
   - [ref属性](#ref%E5%B1%9E%E6%80%A7)
   - [配置项props](#%E9%85%8D%E7%BD%AE%E9%A1%B9props)
+  - [mixin（混入）配置](#mixin%E6%B7%B7%E5%85%A5%E9%85%8D%E7%BD%AE)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -88,3 +89,17 @@
     }
   
   备注： props是只读的，vue底层会对你的props进行监视，如果你进行了修改，就好提示警告，如业务需要进行修改，那么请复制一份props中的内容到data中，修改data中的数据
+
+
+## mixin（混入）配置
+  功能，可以把多个组件的共用项配置成一个混入对象
+  使用方式：
+    第一步定义混合：
+      {
+        data(){...},
+        methods:{....}
+      }
+    第二步使用混合
+      全局混入： Vue.mixin(xxx)
+      局部混入：mixins:[xxx]
+
