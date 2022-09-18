@@ -7,6 +7,7 @@
   - [不同版本的vue说明](#%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E7%9A%84vue%E8%AF%B4%E6%98%8E)
   - [vue.config.js配置文件](#vueconfigjs%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
   - [ref属性](#ref%E5%B1%9E%E6%80%A7)
+  - [配置项props](#%E9%85%8D%E7%BD%AE%E9%A1%B9props)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -55,4 +56,35 @@
   this.$ref.xxx
   ```
 
+## 配置项props
+  功能：让组件接收外部传入的数据  
+  1、传递数据
 
+      <Demo name='xxx'>
+
+
+  2、接收数据
+
+    <!-- 第一种方式（只接收）： -->
+    props: ['name']
+    <!-- 第二种方式（限制类型） -->
+    props: {
+      name: String
+    }
+    <!-- 第三种接送方式（限制类型、限制必要性、制定默认值） -->
+    props:{
+      name: {
+        type: String, //指令类型值
+        required: true  //是否为必填项
+      },
+      age: {
+        type: Number,  //指令类型值
+        default: 80    //默认值
+      },
+      sex: {
+        tyep: String,
+        required: false
+      }
+    }
+  
+  备注： props是只读的，vue底层会对你的props进行监视，如果你进行了修改，就好提示警告，如业务需要进行修改，那么请复制一份props中的内容到data中，修改data中的数据
