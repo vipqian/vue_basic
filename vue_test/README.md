@@ -6,6 +6,7 @@
   - [脚手架文件结构分析](#%E8%84%9A%E6%89%8B%E6%9E%B6%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90)
   - [不同版本的vue说明](#%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E7%9A%84vue%E8%AF%B4%E6%98%8E)
   - [vue.config.js配置文件](#vueconfigjs%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
+  - [ref属性](#ref%E5%B1%9E%E6%80%A7)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -40,3 +41,18 @@
 ## vue.config.js配置文件
 > 使用vue inspect > output.js可以查看vue脚手架的默认配置
 > 使用vue.config.js可以对脚手架进行个性化的配置，详见：https://cli.vuejs.org/zh/config/
+
+
+
+## ref属性
+ 1、被用来给元素或子组件注册引用信息（id替换者  
+ 2、应用在真是的html上获取的是DOM元素，应用在组件标签上获取的是子组件的实例对象（vc）  
+ 3、使用方式：
+  ```
+  <!-- 打标识 -->
+  <h1 ref="xxx">....</h1>或者 <School ref="xxx"></School>
+  <!-- 获取方式： -->
+  this.$ref.xxx
+  ```
+
+
