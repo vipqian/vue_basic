@@ -1,20 +1,28 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-17 19:56:04
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-19 22:08:13
+ * @Description: file content
+ * @FilePath: /vue_test/src/App.vue
+-->
 <template>
   <div>
-    <School/>
+    <SchoolInfo/>
     <hr>
-    <Student/>
+    <StudentInfo/>
   </div>
 </template>
 
 <script>
-import Student from './components/Student'
-import School from './components/School.vue';
+import StudentInfo from './components/Student'
+import SchoolInfo from './components/School.vue';
 
 export default {
   name: 'App',
   components: {
-    Student,
-    School
+    StudentInfo,
+    SchoolInfo
 },
 }
 </script>

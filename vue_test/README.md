@@ -9,6 +9,7 @@
   - [ref属性](#ref%E5%B1%9E%E6%80%A7)
   - [配置项props](#%E9%85%8D%E7%BD%AE%E9%A1%B9props)
   - [mixin（混入）配置](#mixin%E6%B7%B7%E5%85%A5%E9%85%8D%E7%BD%AE)
+  - [插件](#%E6%8F%92%E4%BB%B6)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -105,3 +106,20 @@
       局部混入：mixins:[xxx]
   ```
 
+## 插件
+  功能：用于增强vue
+  本质：包含insert方法的一个对象，insert的第一个参数是vue，第二个参数是插件使用者传递的数据
+  定义插件：
+  ```
+  对象.install = funtion(Vue, option){
+    <!-- 添加全局过滤器 -->
+    Vue.filter(...)
+    <!-- 添加全局指令 -->
+    Vue.directive(...)
+    Vue.mixin(...)
+    Vue.prototype.$MyMethod = funtion (...)
+    Vue.prototype.$MyProto = funtion (...)
+  }
+  ```
+  使用插件
+  Vue.uer(...)
