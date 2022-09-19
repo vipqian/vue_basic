@@ -10,6 +10,7 @@
   - [配置项props](#%E9%85%8D%E7%BD%AE%E9%A1%B9props)
   - [mixin（混入）配置](#mixin%E6%B7%B7%E5%85%A5%E9%85%8D%E7%BD%AE)
   - [插件](#%E6%8F%92%E4%BB%B6)
+  - [scoped 样式](#scoped-%E6%A0%B7%E5%BC%8F)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -123,3 +124,10 @@
   ```
   使用插件
   Vue.uer(...)
+
+
+## scoped 样式
+ 作用：让样式局部生效，防止冲突
+ 写法：<style scoped>
+ 说明：<style lang="less" scoped> 其中lang是制定使用的less还是css，如果使用less，需要npm i less-loader
+
