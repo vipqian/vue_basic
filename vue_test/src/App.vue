@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-21 22:28:00
+ * @LastEditTime: 2022-09-22 21:24:27
  * @Description: file content
  * @FilePath: /vue_test/src/App.vue
 -->
@@ -10,8 +10,10 @@
   <div class="todo-container">
         <div class="todo-wrap">
           <MyHeader :addTodo="addTodo"></MyHeader>
-          <TodoLsit :todoList="todoList" :checkTodo="checkTodo"></TodoLsit>
-          <MyFooter></MyFooter>
+          <TodoLsit :todoList="todoList" :checkTodo="checkTodo" :delTodo="delTodo"></TodoLsit>
+          <MyFooter
+            :todoList="todoList"
+          />
         </div>
       </div>
 </template>
@@ -32,7 +34,13 @@ export default {
   },
   data() {
     return {
-      todoList: []
+      todoList: [
+        {id: '1',
+        title: '学习',
+        status: true  
+      }
+        
+      ]
     }
   },
   methods: {
@@ -45,6 +53,11 @@ export default {
         if(todo.id === id){
           todo.status = !todo.status
         }
+      })
+    },
+    delTodo(id){
+      this.todoList = this.todoList.filter((todo)=>{
+        return todo.id != id
       })
     }
   },

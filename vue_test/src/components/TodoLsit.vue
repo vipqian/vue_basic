@@ -2,13 +2,13 @@
  * @Author: wangyunfei
  * @Date: 2022-09-19 23:18:36
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-21 22:27:33
+ * @LastEditTime: 2022-09-22 21:15:45
  * @Description: file content
  * @FilePath: /vue_test/src/components/TodoLsit.vue
 -->
 <template>
   <ul class="todo-main">
-    <Item v-for="todoObj in todoList" :key="todoObj.id" :todo="todoObj" :checkTodo="checkTodo"></Item>
+    <Item v-for="todoObj in todoList" :key="todoObj.id" :todo="todoObj" :checkTodo="checkTodo" :delTodo="delTodo"></Item>
 
   </ul>
 </template>
@@ -18,7 +18,7 @@ import Item from './Item.vue';
   export default {
     name: "TodoList",
     components: { Item },
-    props: ['todoList', 'checkTodo']
+    props: ['todoList', 'checkTodo', 'delTodo']
 }
 </script>
 

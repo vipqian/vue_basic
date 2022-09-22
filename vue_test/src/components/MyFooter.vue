@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-19 23:17:36
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-20 21:49:14
+ * @LastEditTime: 2022-09-22 21:45:35
  * @Description: file content
  * @FilePath: /vue_test/src/components/MyFooter.vue
 -->
@@ -12,7 +12,7 @@
       <input type="checkbox">
     </label>
     <span>
-      <span>已完成0</span>/ 全部 2
+      <span>已完成{{todoTotal}}</span>/ 全部 {{todoList.length}}
     </span>
     <button class="btn btn-danger">清除已完成任务</button>
   </div>
@@ -20,7 +20,19 @@
 
 <script>
   export default {
-    name: "MyFooter"
+    name: "MyFooter",
+    props:['todoList'],
+    computed: {
+      todoTotal(){
+        // const temp = this.todoList.filter(todo => todo.status == true)
+        // console.log(temp)
+        // return temp.length
+        return this.todoList.reduce((pre, currentValue) => { 
+          return pre + (currentValue.status ? 1:0)
+         }, 0)
+
+      }
+    },
   }
 </script>
 
