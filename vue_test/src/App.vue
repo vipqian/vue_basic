@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-22 21:24:27
+ * @LastEditTime: 2022-09-24 09:01:17
  * @Description: file content
  * @FilePath: /vue_test/src/App.vue
 -->
@@ -12,7 +12,9 @@
           <MyHeader :addTodo="addTodo"></MyHeader>
           <TodoLsit :todoList="todoList" :checkTodo="checkTodo" :delTodo="delTodo"></TodoLsit>
           <MyFooter
-            :todoList="todoList"
+            :todoList="todoList" 
+            :delDoneTodos='delDoneTodos'
+            :checkAllTodo="checkAllTodo"
           />
         </div>
       </div>
@@ -58,6 +60,19 @@ export default {
     delTodo(id){
       this.todoList = this.todoList.filter((todo)=>{
         return todo.id != id
+      })
+    },
+
+    delDoneTodos(){
+      this.todoList = this.todoList.filter((todo)=>{
+        return todo.status == false
+
+      })
+    },
+    
+    checkAllTodo(status){
+      this.todoList.forEach((todo)=>{
+        todo.status = status
       })
     }
   },

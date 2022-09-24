@@ -2,27 +2,31 @@
  * @Author: wangyunfei
  * @Date: 2022-09-19 23:17:36
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-22 21:45:35
+ * @LastEditTime: 2022-09-24 09:11:52
  * @Description: file content
  * @FilePath: /vue_test/src/components/MyFooter.vue
 -->
 <template>
-  <div class="todo-footer">
+  <div class="todo-footer" v-if="total">
     <label>
-      <input type="checkbox">
+      <!-- <input type="checkbox" :checked="isAll" @click="checkAll"> -->
+      <input type="checkbox" v-model="isAll">
     </label>
     <span>
-      <span>已完成{{todoTotal}}</span>/ 全部 {{todoList.length}}
+      <span>已完成{{todoTotal}}</span>/ 全部 {{total}}
     </span>
-    <button class="btn btn-danger">清除已完成任务</button>
+    <button class="btn btn-danger" @click="delDoneTodos">清除已完成任务</button>
   </div>
 </template>
 
 <script>
   export default {
     name: "MyFooter",
-    props:['todoList'],
+    props:['todoList', 'delDoneTodos', 'checkAllTodo'],
     computed: {
+      total(){
+        return  this.todoList.length
+      },
       todoTotal(){
         // const temp = this.todoList.filter(todo => todo.status == true)
         // console.log(temp)
@@ -31,8 +35,25 @@
           return pre + (currentValue.status ? 1:0)
          }, 0)
 
+      },
+      // isAll(){
+      //   console.log(this.todoTotal == this.total);
+      //   return this.todoTotal === this.total && this.todoTotal > 0
+      // }
+      isAll:{
+        get(){
+          return this.todoTotal === this.total && this.todoTotal > 0
+        },
+        set(value){
+          this.checkAllTodo(value)
+        }
       }
     },
+    // methods: {
+    //   checkAll(e){
+    //     this.checkAllTodo(e.target.checked)
+    //   }
+    // },
   }
 </script>
 

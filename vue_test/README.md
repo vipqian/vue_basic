@@ -11,6 +11,7 @@
   - [mixin（混入）配置](#mixin%E6%B7%B7%E5%85%A5%E9%85%8D%E7%BD%AE)
   - [插件](#%E6%8F%92%E4%BB%B6)
   - [scoped 样式](#scoped-%E6%A0%B7%E5%BC%8F)
+  - [todo案例总结](#todo%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -130,4 +131,18 @@
  作用：让样式局部生效，防止冲突
  写法：<style scoped>
  说明：<style lang="less" scoped> 其中lang是制定使用的less还是css，如果使用less，需要npm i less-loader
+
+## todo案例总结
+1、组件化编码流程
+  拆分静态组件：组件要按照功能点进行拆分，命名不要与html冲突
+  实现动态组件：考虑好数据存放的位置，数据是一个组件在用还是多个组件在用
+    一个组件在用：放在组件自身即可
+    多个组件在用：放在他们共同的父组件身上（状态提升）
+  实现交互，绑定事件开始
+2、props适用于：
+  父组件 ==> 子组件 通信
+  子组件 ==> 父组件 通信 （要求父亲先给一个函数）
+3、使用v-model要切记：v-model绑定的值不能是props中的值，因为props是不可被修改的
+4、props传过来的值是对象的值，修改对象内的值Vue时不报错的，但是不推荐这样做
+
 
