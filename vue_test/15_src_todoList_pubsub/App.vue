@@ -2,29 +2,28 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-30 22:54:30
+ * @LastEditTime: 2022-10-03 17:34:23
  * @Description: file content
- * @FilePath: /vue_test/07_src_todo案例/App.vue
+ * @FilePath: /vue_test/src/App.vue
 -->
 <template>
   <div class="todo-container">
         <div class="todo-wrap">
-          <MyHeader :addTodo="addTodo"></MyHeader>
-          <TodoLsit :todoList="todoList" :checkTodo="checkTodo" :delTodo="delTodo"></TodoLsit>
+          <MyHeader ref="MyHeader"/>
+          <TodoLsit :todoList="todoList"/>
           <MyFooter
             :todoList="todoList" 
-            :delDoneTodos='delDoneTodos'
-            :checkAllTodo="checkAllTodo"
+            ref="MyFooter"
           />
         </div>
       </div>
 </template>
 
 <script>
-import MyHeader from './components/MyHeader.vue';
-import TodoLsit from './components/TodoLsit.vue';
-import MyFooter from './components/MyFooter.vue';
-
+  import pubsub from 'pubsub-js'
+  import MyHeader from './components/MyHeader.vue';
+  import TodoLsit from './components/TodoLsit.vue';
+  import MyFooter from './components/MyFooter.vue';
 
 
 export default {
@@ -51,7 +50,8 @@ export default {
         }
       })
     },
-    delTodo(id){
+    delTodo(_, id){
+      console.log(id);
       this.todoList = this.todoList.filter((todo)=>{
         return todo.id != id
       })
@@ -75,7 +75,27 @@ export default {
     if(localTodoList){
       this.todoList = localTodoList
     }
-  }
+    this.$refs.MyHeader.$on('addTodo', this.addTodo)
+    this.$refs.MyFooter.$on('delDoneTodos', this.delDoneTodos)
+    this.$refs.MyFooter.$on('checkAllTodo', this.checkAllTodo)
+
+    this.$bus.$on('checkTodo', this.checkTodo)
+    this.pubID = pubsub.subscribe('delTodo', this.delTodo)
+    // this.$bus.$on('delTodo', this.delTodo)
+  },
+  beforeDestroy() {
+    this.$bus.$off('checkTodo')
+    // this.$bus.$off('delTodo')
+    pubsub.unsubscribe(this.pubID)
+  },
+  watch: {
+    todoList:{
+      deep: true,
+      handler(values){
+        localStorage.setItem('todoList', JSON.stringify(values))
+      }
+    }
+  },
 }
 </script>
 

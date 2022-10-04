@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-30 22:54:30
+ * @LastEditTime: 2022-09-30 19:33:23
  * @Description: file content
  * @FilePath: /vue_test/07_src_todo案例/App.vue
 -->
@@ -75,7 +75,15 @@ export default {
     if(localTodoList){
       this.todoList = localTodoList
     }
-  }
+  },
+  watch: {
+    todoList:{
+      deep: true,
+      handler(values){
+        localStorage.setItem('todoList', JSON.stringify(values))
+      }
+    }
+  },
 }
 </script>
 

@@ -2,19 +2,18 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-09-30 22:54:30
+ * @LastEditTime: 2022-09-30 23:05:17
  * @Description: file content
- * @FilePath: /vue_test/07_src_todo案例/App.vue
+ * @FilePath: /vue_test/src/App.vue
 -->
 <template>
   <div class="todo-container">
         <div class="todo-wrap">
-          <MyHeader :addTodo="addTodo"></MyHeader>
+          <MyHeader ref="MyHeader"></MyHeader>
           <TodoLsit :todoList="todoList" :checkTodo="checkTodo" :delTodo="delTodo"></TodoLsit>
           <MyFooter
             :todoList="todoList" 
-            :delDoneTodos='delDoneTodos'
-            :checkAllTodo="checkAllTodo"
+            ref="MyFooter"
           />
         </div>
       </div>
@@ -75,7 +74,18 @@ export default {
     if(localTodoList){
       this.todoList = localTodoList
     }
-  }
+    this.$refs.MyHeader.$on('addTodo', this.addTodo)
+    this.$refs.MyFooter.$on('delDoneTodos', this.delDoneTodos)
+    this.$refs.MyFooter.$on('checkAllTodo', this.checkAllTodo)
+  },
+  watch: {
+    todoList:{
+      deep: true,
+      handler(values){
+        localStorage.setItem('todoList', JSON.stringify(values))
+      }
+    }
+  },
 }
 </script>
 

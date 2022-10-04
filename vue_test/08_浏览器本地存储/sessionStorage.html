@@ -1,0 +1,49 @@
+<!--
+ * @Author: wangyunfei
+ * @Date: 2022-09-24 18:58:16
+ * @LastEditors: wangyunfei
+ * @LastEditTime: 2022-09-30 17:59:40
+ * @Description: file content   
+ * @FilePath: /vue_test/08_浏览器本地存储/sessionStorage.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sessionStorage</title>
+</head>
+<body>
+    <h3>sessionStorage</h3>
+    <button onclick="saveData()">点我保存数据</button>
+    <button onclick="readData()">点我读取数据</button>
+    <button onclick="deleteData()">点我删除一个数据</button>
+    <button onclick="deleteAllData()">点我删除全部数据</button>
+
+    <script type="text/javascript">
+        function saveData(){
+            let p = {
+                name: 'Torn',
+                age: 12
+            }
+            console.log('1');
+            sessionStorage.setItem('msg', 'hello')
+            sessionStorage.setItem('msg2', 666)
+            sessionStorage.setItem('person', JSON.stringify(p))
+        }
+        function readData(){
+            
+            console.log(sessionStorage.getItem('msg'));
+            console.log(sessionStorage.getItem('msg2'));
+            console.log(JSON.parse(sessionStorage.getItem('person')));
+        }
+        function deleteData(){
+            sessionStorage.removeItem('msg2')
+        }
+        function deleteAllData(){
+            sessionStorage.clear()
+        }
+    </script>
+</body>
+</html>
