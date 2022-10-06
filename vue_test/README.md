@@ -22,6 +22,11 @@
     - [方法一](#%E6%96%B9%E6%B3%95%E4%B8%80)
     - [方法二](#%E6%96%B9%E6%B3%95%E4%BA%8C)
   - [插槽](#%E6%8F%92%E6%A7%BD)
+  - [Vuex](#vuex)
+    - [1、概念](#1%E6%A6%82%E5%BF%B5)
+    - [2、何时使用](#2%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8)
+    - [3、搭建vuex环境](#3%E6%90%AD%E5%BB%BAvuex%E7%8E%AF%E5%A2%83)
+    - [4、基本使用](#4%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -421,3 +426,110 @@ devServer: {
         }
       </script>
       ```
+## Vuex
+
+### 1、概念
+&emsp;&emsp;在vue中实现集中式状态（数据）管理的插件，对vue中多个组件的共享状态进行集中的管理（读写）也是组件中的一种通信，适用于任何组件
+
+### 2、何时使用
+&emsp;&emsp;多个组件共享数据
+
+### 3、搭建vuex环境
+&emsp;&emsp;1、创建文件```src/store/index.js```
+```
+
+// 导入vuex
+import Vue from 'vue'
+// 引入vuex
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+// 准备action --用于响应组件中的动作
+const actions = {}
+
+// 准备mutations --用于操作数据
+const mutations = {}
+
+// 准备state --用于存储数据
+const state = {}
+
+// 创建并且到处vuex
+export default new Vuex.Store({
+    actions,
+    mutations,
+    state
+})
+
+```
+&emsp;&emsp;2、在main.js中创建vm时传入store配置
+```
+import store from '../src/store/index'
+
+
+
+new Vue({
+    render: h => h(App),
+    store: store,
+    beforeCreate(){
+        Vue.prototype.$bus = this
+    }
+}).$mount("#app")
+```
+
+### 4、基本使用
+&emsp;&emsp;1、初始化数据，配置```actions```、配置```mutations```、操作文件```store.js```
+```
+// 导入vuex
+import Vue from 'vue'
+// 引入vuex
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+// 准备action --用于响应组件中的动作
+const actions = {
+    increment(context, value){
+        context.commit('INCREMENT', value)
+    },
+    decrement(context, value){
+        context.commit('DECREMENT', value)
+    },
+    incrementOdd(context, value){
+        if(context.state.sum % 2){
+            context.commit('INCREMENT', value)
+        }
+    },
+    incrementWait(context, value){
+        setTimeout(() => {
+            context.commit('INCREMENT', value)
+        }, 500);
+    },
+}
+
+// 准备mutations --用于操作数据
+const mutations = {
+    INCREMENT(state, value){
+        state.sum += value
+    },
+    DECREMENT(state, value){
+        state.sum -= value
+    },
+    
+}
+
+// 准备state --用于存储数据
+const state = {
+    sum: 0
+}
+
+// 创建并且到处vuex
+export default new Vuex.Store({
+    actions,
+    mutations,
+    state
+})
+```
+&emsp;&emsp;2、组件中读取vuex中的数据```$store.state.sum```
+
+&emsp;&emsp; 3、组建中修改vuex中的数据```this.$store.dispatch('actions中的方法名', 数据)```或者```this.$store.commit('mutations中的方法名', 数据)``` 注:若没有网络请求和业务逻辑，可以不用哪个```dispatch```直接使用```commit```
