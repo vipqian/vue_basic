@@ -27,7 +27,8 @@
     - [2、何时使用](#2%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8)
     - [3、搭建vuex环境](#3%E6%90%AD%E5%BB%BAvuex%E7%8E%AF%E5%A2%83)
     - [4、基本使用](#4%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
-    - [getters使用](#getters%E4%BD%BF%E7%94%A8)
+    - [5、getters使用](#5getters%E4%BD%BF%E7%94%A8)
+    - [6、四个maps方法使用](#6%E5%9B%9B%E4%B8%AAmaps%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -535,7 +536,7 @@ export default new Vuex.Store({
 
 &emsp;&emsp;3、组建中修改vuex中的数据```this.$store.dispatch('actions中的方法名', 数据)```或者```this.$store.commit('mutations中的方法名', 数据)``` 注:若没有网络请求和业务逻辑，可以不用哪个```dispatch```直接使用```commit```
 
-### getters使用
+### 5、getters使用
 &emsp;&emsp;1、概念：当state中的数据需要加工时，可以使用getters加工
 
 &emsp;&emsp;2、在store.js这个添加getters的配置
@@ -555,5 +556,25 @@ export default new Vuex.Store({
 ```
 &emsp;&emsp;3、组件中读取vuex中的数据```$store.getters.bigSum```
 
+### 6、四个maps方法使用
+&emsp;&emsp;1、mapStore方法，用于帮助我们映射中的```state```数据为计算属性
+```
+computed: {
+  //  mapStore:借助mapState计算属性方法，从state中读取数据：对象写法
+  // {A ...{B}}将B对象中的每个值写入到A对象中
+  // ...mapState({sum: 'sum', school: 'school', subject: 'subject' }),
+  //  mapStore:借助mapState计算属性方法，从state中读取数据：数组写法列表中的内容为state种存在的key
+  ...mapState(['sum', 'school', 'subject']),
+},
+```
 
+&emsp;&emsp;1、mapGetters方法，用于帮助我们映射中的```gatters```数据为计算属性
+```
+computed: {
+  //  mapGetters:借助mapGetters计算属性方法，从getters中读取数据：对象写法
+  // ...mapGetters({bigSum: 'bigSum'}),
 
+  //  mapGetters:借助mapGetters计算属性方法，从getters中读取数据：数组写法
+  ...mapGetters(['bigSum'])
+},
+```

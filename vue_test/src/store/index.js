@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-10-06 22:05:06
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-06 23:59:37
+ * @LastEditTime: 2022-10-07 00:15:59
  * @Description: 该文件用于vuex的核心store
  * @FilePath: /vue_test/src/store/index.js
  */
@@ -47,7 +47,9 @@ const mutations = {
 
 // 准备state --用于存储数据
 const state = {
-    sum: 0
+    sum: 0,
+    school: '尚硅谷',
+    subject: '前端'
 }
 
 // 准备getters --用于state中的数据加工
