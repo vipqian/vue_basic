@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-10-06 22:05:06
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-06 22:57:20
+ * @LastEditTime: 2022-10-06 23:59:37
  * @Description: 该文件用于vuex的核心store
  * @FilePath: /vue_test/src/store/index.js
  */
@@ -50,9 +50,17 @@ const state = {
     sum: 0
 }
 
+// 准备getters --用于state中的数据加工
+const getters = {
+    bigSum(state){
+        return state.sum*10
+    }
+}
+
 // 创建并且到处vuex
 export default new Vuex.Store({
     actions,
     mutations,
-    state
+    state,
+    getters
 })

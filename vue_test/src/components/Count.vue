@@ -2,13 +2,14 @@
  * @Author: wangyunfei
  * @Date: 2022-10-04 20:32:59
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-06 23:30:41
+ * @LastEditTime: 2022-10-07 00:00:43
  * @Description: file content
  * @FilePath: /vue_test/src/components/Count.vue
 -->
 <template>
     <div>
       <h3>和是{{$store.state.sum}}</h3>
+      <h3>和放大10倍的结果是{{$store.getters.bigSum}}</h3>
       <div>
         <select v-model.number="n">
           <option value="1">1</option>

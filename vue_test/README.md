@@ -27,6 +27,7 @@
     - [2、何时使用](#2%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8)
     - [3、搭建vuex环境](#3%E6%90%AD%E5%BB%BAvuex%E7%8E%AF%E5%A2%83)
     - [4、基本使用](#4%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
+    - [getters使用](#getters%E4%BD%BF%E7%94%A8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -532,4 +533,27 @@ export default new Vuex.Store({
 ```
 &emsp;&emsp;2、组件中读取vuex中的数据```$store.state.sum```
 
-&emsp;&emsp; 3、组建中修改vuex中的数据```this.$store.dispatch('actions中的方法名', 数据)```或者```this.$store.commit('mutations中的方法名', 数据)``` 注:若没有网络请求和业务逻辑，可以不用哪个```dispatch```直接使用```commit```
+&emsp;&emsp;3、组建中修改vuex中的数据```this.$store.dispatch('actions中的方法名', 数据)```或者```this.$store.commit('mutations中的方法名', 数据)``` 注:若没有网络请求和业务逻辑，可以不用哪个```dispatch```直接使用```commit```
+
+### getters使用
+&emsp;&emsp;1、概念：当state中的数据需要加工时，可以使用getters加工
+
+&emsp;&emsp;2、在store.js这个添加getters的配置
+```
+...
+const getters = {
+  bigSum(state){
+    return state.sum * 10
+  }
+}
+
+// 创建并且到处vuex
+export default new Vuex.Store({
+    ...
+    getters
+})
+```
+&emsp;&emsp;3、组件中读取vuex中的数据```$store.getters.bigSum```
+
+
+
