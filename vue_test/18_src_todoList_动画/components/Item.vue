@@ -2,12 +2,12 @@
  * @Author: wangyunfei
  * @Date: 2022-10-03 08:37:42
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-04 09:47:24
+ * @LastEditTime: 2022-10-04 09:54:08
  * @Description: file content
- * @FilePath: /vue_test/16_src_todoList_nextTick/components/Item.vue
+ * @FilePath: /vue_test/src/components/Item.vue
 -->
 <template>
-  <transition 
+  <transition
   appear 
   name="animate__animated animate__bounce" 
   enter-active-class="animate__rubberBand"

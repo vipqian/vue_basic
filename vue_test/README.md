@@ -18,6 +18,10 @@
   - [消息订阅与发布 （pubsub）](#%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83-pubsub)
   - [nextTick](#nexttick)
   - [Vue封装的过度与动画](#vue%E5%B0%81%E8%A3%85%E7%9A%84%E8%BF%87%E5%BA%A6%E4%B8%8E%E5%8A%A8%E7%94%BB)
+  - [Vue脚手架配置代理](#vue%E8%84%9A%E6%89%8B%E6%9E%B6%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86)
+    - [方法一](#%E6%96%B9%E6%B3%95%E4%B8%80)
+    - [方法二](#%E6%96%B9%E6%B3%95%E4%BA%8C)
+  - [插槽](#%E6%8F%92%E6%A7%BD)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -295,3 +299,125 @@ new Vue({
   ```
 
   3、如果使用多个元素，你那就要使用```transition-group>```每个元素都需要指定key值
+
+
+## Vue脚手架配置代理
+
+### 方法一
+
+  在vue.config.js中直接配置
+  ```devServer: {
+    proxy: 'http://localhost:8000'
+  }
+  ```
+说明：
+  * 优点，配置简单，请求资源时，直接发送给前端（8080）即可
+  * 缺点，不能配置多个代理，不能灵活的控制请求是否走代理
+  * 工作方式：若按照上述配置代理，当请求了前端不存在的
+资源时，那么该请求会转发给服务（优先匹配前端资源）
+
+### 方法二
+在vue.config.js中编写匹配规则
+```
+devServer: {
+  
+    proxy: {
+      '/atguigu': { //匹配以/atguigu开头的请求
+        target: 'http://localhost:8000', //代理目标的基础路径
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {'^/atguigu': ''}
+      }
+    }
+  }
+  /*
+  changeOrigin设置为true时，服务器收到的请求头中的host为localhost:5000
+  changeOrigin设置为false时，服务器收到的请求头中的host为localhost:8080
+  changeOrigin默认为false
+  */
+```
+说明：
+* 优点，可以配置多个代理。 且可以灵活的配置请求是否走代理
+* 缺点，配置略微繁琐，请求头必须添加前缀
+
+
+## 插槽
+* 作用：可以让父组件向子组件指定位置插入html结构，也是一种组件间的通信方式 父 ====> 子
+  
+* 分类：默认插槽、具名插槽、作用域插槽
+  
+* 使用方式
+  * 默认插槽
+  ```
+  父组件中
+  <Category>
+    <div>html结构1</div>
+  </Category>
+
+  子组件中
+  <template>
+    <div>
+      <slot>插槽默认内容</slot>
+    </div>
+  </template>
+  ```
+  * 具名插槽
+  ```
+  父组件中
+  <Category>
+    <template slot='center'>
+      <div>html结构1</div>
+    </template>
+
+    <template v-slot:footer>
+      <div>html结构2</div>
+    </template>
+  </Category>
+
+  子组件中
+  <template>
+    <div>
+      <slot name='center'>插槽默认内容</slot>
+      <slot name='footer'>插槽默认内容</slot>
+    </div>
+  </template>
+  ```
+  * 作用域插槽
+    * 理解：<span style='color: read'>数据在组件的自身，但是数据的结构需要根据组件的使用者来决定</span>（数据在Category组件中，但是使用数据遍历出来的结构需要App组件决定）
+  
+    * 具体编码
+      ```
+      <!-- 父组件中 -->
+      <Category>
+        <template scope='scopeData'>
+          <ul>
+            <li v-for="(item, index) in scopeData.games" :key="index">{{item}}</li>
+          </ul>
+        </template>
+      </Category>
+
+      <Category>
+        <template scope='scopeData'>
+          <h4 v-for="(item, index) in scopeData.games" :key="index">{{item}}</h4>
+        </template>
+      </Category>
+
+      <!-- 子组件中 -->
+      <template>
+        <div>
+          <slot :games='games'>插槽默认内容</slot>
+        </div>
+      </template>
+      
+      <script>
+        export default {
+        name: 'Category',
+        props: ['title'],
+        data() {
+          return {
+            games: ['忍者3', '红色警戒', '穿越火线', '超级玛丽'],
+            }
+          },
+        }
+      </script>
+      ```

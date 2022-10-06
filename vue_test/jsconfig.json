@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "paths": {
       "@/*": [
-        "src/*"
+        "21_src_github搜索案例_vue-resource/*"
       ]
     },
     "lib": [
