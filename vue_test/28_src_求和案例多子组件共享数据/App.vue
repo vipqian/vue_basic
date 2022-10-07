@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-07 22:44:29
+ * @LastEditTime: 2022-10-07 10:13:41
  * @Description: file content
  * @FilePath: /vue_test/src/App.vue
 -->
@@ -21,9 +21,7 @@ import Person from './components/Person.vue';
 
 export default {
     name: "App",
-    components: { 
-      Count, 
-      Person
+    components: { Count, Person
     },
     
 }

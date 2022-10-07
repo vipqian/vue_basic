@@ -29,6 +29,7 @@
     - [4、基本使用](#4%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
     - [5、getters使用](#5getters%E4%BD%BF%E7%94%A8)
     - [6、四个maps方法使用](#6%E5%9B%9B%E4%B8%AAmaps%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8)
+    - [7、模块化+空间命名](#7%E6%A8%A1%E5%9D%97%E5%8C%96%E7%A9%BA%E9%97%B4%E5%91%BD%E5%90%8D)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -616,3 +617,143 @@ computed: {
 ```
 >备注:mapActions和mapMutations使用时，若要是传递参数时，需要在模板绑定事件时传递好参数，否则参数为事件对象
 
+### 7、模块化+空间命名
+&emsp;&emsp;1、目的：让代码更好维护，让多种数据分类更加明确
+
+&emsp;&emsp;2、修改store.js
+```
+import Vue from 'vue'
+// 引入vuex
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const countOption {
+    namespaced: true,
+    actions: {
+        increment(context, value){
+            context.commit('INCREMENT', value)
+        },
+        decrement(context, value){
+            context.commit('DECREMENT', value)
+        },
+        incrementOdd(context, value){
+            if(context.state.sum % 2){
+                context.commit('INCREMENT', value)
+            }
+        },
+        incrementWait(context, value){
+            setTimeout(() => {
+                context.commit('INCREMENT', value)
+            }, 500);
+        },
+    },
+    mutations: {
+        INCREMENT(state, value){
+            state.sum += value
+        },
+        DECREMENT(state, value){
+            state.sum -= value
+        },
+    },
+    state: {
+        sum: 0,
+        school: '尚硅谷',
+        subject: '前端',
+    },
+    getters: {
+        bigSum(state){
+            return state.sum*10
+        }
+    }
+}
+
+const personOption =  {
+  namespaced: true,
+  actions: {
+      addPerson(context, value){
+          if(value.name.indexOf('王') === 0){
+              context.commit('ADD_PERSON', value)
+          }else{
+              console.log('不是以王开头的名字', value);
+          }
+      },
+      addPersonServer(context){
+          let url = 'https://api.uixsj.cn/hitokoto/get?type=social'
+          axios.get(url).then(
+              response => {
+                  let person = {
+                      id: nanoid(),
+                      name: response.data,
+                      age: 18,
+                      sex: '男'
+                  }
+                  context.commit('ADD_PERSON', person)
+              },
+              error => {
+                  alert(error.message)
+              }
+          )
+      }
+  },
+  mutations: {
+      ADD_PERSON(state, value){
+          state.persons.unshift(value)
+      }
+  },
+  state: {
+      persons: [
+          // {id: '1', name: 'li', age: 18, sex: '男'}
+      ]
+  },
+  getters: {
+      firstPersonName(state){
+          if (state.persons.length){
+              return state.persons[0].name
+          }
+          else{
+              return '没有Person'
+          }
+      }
+  }
+}
+
+export default new Vuex.Store({
+    modules: {
+        PersonOptions,
+        CountOptions
+    }
+})
+```
+
+&emsp;&emsp;3、开启命名空间，读取state中的数据
+```
+<!-- 方式一 自己读取-->
+$store.state.PersonOptions.personns
+<!-- 方式一 借助PersonOptions读取-->
+...mapState('PersonOptions', ['persons']),
+```
+
+&emsp;&emsp;4、开启命名空间，读取getter中的数据
+```
+<!-- 方式一 自己读取-->
+$store.state.getters('PersonOptions/firstPersonName')
+<!-- 方式二 借助mapGetters读取-->
+...mapGetters('PersonOptions', ['firstPersonName'])
+```
+
+&emsp;&emsp;5、开启命名空间，组件中调用dispatch
+```
+<!-- 方式一 自己读取-->
+$store.dispatch('PersonOptions/addPerson', person)
+<!-- 方式二 借助mapActions读取-->
+...mapActions('PersonOptions', ['addPerson'])
+```
+
+&emsp;&emsp;6、开启命名空间，组件中调用commit
+```
+<!-- 方式一 自己读取-->
+this.$store.commit('PersonOptions/ADD_PERSON', person)
+<!-- 方式二 借助mapActions读取-->
+...mapMutations('PersonOptions', ['ADD_PERSON'])
+```

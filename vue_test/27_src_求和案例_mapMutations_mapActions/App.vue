@@ -2,14 +2,13 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-07 22:44:29
+ * @LastEditTime: 2022-10-06 22:46:37
  * @Description: file content
  * @FilePath: /vue_test/src/App.vue
 -->
 <template>
   <div class="container" >
     <Count></Count>
-    <Person></Person>
   </div>
 </template>
 
@@ -17,14 +16,10 @@
 
 
 import Count from './components/Count.vue';
-import Person from './components/Person.vue';
 
 export default {
     name: "App",
-    components: { 
-      Count, 
-      Person
-    },
+    components: { Count },
     
 }
 </script>
