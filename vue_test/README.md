@@ -592,3 +592,27 @@ computed: {
   ...mapGetters(['bigSum'])
 },
 ```
+
+&emsp;&emsp;3、mapActions方法，用于帮助我生产```actions```的对话方法。即包含了```$store.dispatch('xxx')```的函数
+```
+computed: {
+  //  借助mapActions方法生成对应的方法，里边包含dispatch去练习actions，方法中的参数需要再使用时传递 对象方法
+  // ...mapActions({incrementOdd:'incrementOdd', incrementWait: 'incrementWait'}),
+
+  //  借助mapActions方法生成对应的方法，里边包含dispatch去练习actions，方法中的参数需要再使用时传递 数组方法
+  ...mapActions(['incrementOdd', 'incrementWait'])
+},
+```
+
+&emsp;&emsp;4、mapMutations方法，用于帮助我生产```mutations```的对话方法。即包含了```$store.commit('xxx')```的函数
+```
+computed: {
+  ///  借助mapMutations方法生成对应的方法，里边包含commit去练习mutations，方法中的参数需要再使用时传递 对象方法
+  ...mapMutations({increment: 'INCREMENT', decrement: 'DECREMENT'}),
+  
+  //  借助mapMutations方法生成对应的方法，里边包含commit去练习mutations，方法中的参数需要再使用时传递 数组方法
+  // ...mapMutations(['DECREMENT','INCREMENT']),
+},
+```
+>备注:mapActions和mapMutations使用时，若要是传递参数时，需要在模板绑定事件时传递好参数，否则参数为事件对象
+

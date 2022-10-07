@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-10-04 20:32:59
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-07 09:10:38
+ * @LastEditTime: 2022-10-07 00:43:30
  * @Description: file content
  * @FilePath: /vue_test/src/components/Count.vue
 -->
@@ -17,19 +17,17 @@
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-        <button @click="increment(n)">+</button>
-        <button @click="decrement(n)">-</button>
-        <!-- <button @click="INCREMENT(n)">+</button>
-        <button @click="DECREMENT(n)">-</button> -->
-        <button @click="incrementOdd(n)">奇数时加</button>
-        <button @click="incrementWait(n)">等待一会再加</button>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+        <button @click="incrementOdd">奇数时加</button>
+        <button @click="incrementWait">等待一会再加</button>
       </div>
     </div>
   
 </template>
 
 <script>
-  import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
+  import { mapState, mapGetters } from "vuex";
   export default {
     name: 'Count',
     data() {
@@ -38,44 +36,18 @@
       }
     },
     methods: {
-      /*
-      程序员自己写的
       increment(){
         this.$store.commit('INCREMENT', this.n)
       },
       decrement(){
         this.$store.commit('DECREMENT', this.n)
       },
-      */
-
-     //  借助mapMutations方法生成对应的方法，里边包含commit去练习mutations，方法中的参数需要再使用时传递 对象方法
-     ...mapMutations({increment: 'INCREMENT', decrement: 'DECREMENT'}),
-     
-     //  借助mapMutations方法生成对应的方法，里边包含commit去练习mutations，方法中的参数需要再使用时传递 数组方法
-    //  ...mapMutations(['DECREMENT','INCREMENT']),
-
-
-
-     /*-------------------------------------*/
-
-     /*
       incrementOdd(){
         this.$store.dispatch('incrementOdd', this.n)
       },
       incrementWait(){
         this.$store.dispatch('incrementWait', this.n)
       },
-      */
-
-      //  借助mapActions方法生成对应的方法，里边包含dispatch去练习actions，方法中的参数需要再使用时传递 对象方法
-      // ...mapActions({incrementOdd:'incrementOdd', incrementWait: 'incrementWait'}),
-
-      //  借助mapActions方法生成对应的方法，里边包含dispatch去练习actions，方法中的参数需要再使用时传递 数组方法
-      ...mapActions(['incrementOdd', 'incrementWait'])
-
-
-
-      
     },
     computed: {
       // 程序员自己写计算属性
