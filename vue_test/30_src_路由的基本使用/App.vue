@@ -2,14 +2,16 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-08 13:53:08
+ * @LastEditTime: 2022-10-08 02:17:02
  * @Description: file content
  * @FilePath: /vue_test/src/App.vue
 -->
 <template>
   <div>
     <div class="row">
-      <Banner/>
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>Vue Router Demo</h2></div>
+      </div>
     </div>
     <div class="row">
       <div class="col-xs-2 col-xs-offset-2">
@@ -32,10 +34,9 @@
 </template>
 
 <script>
-import Banner from './components/Banner.vue';
 
 export default {
     name: "App",
-    components: { Banner }
+    
 }
 </script>
