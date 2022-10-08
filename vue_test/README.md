@@ -33,6 +33,7 @@
   - [路由](#%E8%B7%AF%E7%94%B1)
     - [1.基本使用](#1%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
     - [2、几个注意点](#2%E5%87%A0%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9)
+    - [3、多级（嵌套）路由](#3%E5%A4%9A%E7%BA%A7%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -807,5 +808,36 @@ export default new vueRonter({
 - 每个组件都有自己的$route属性，里边存储着自己的路由信息
 - 整个组件只有一个router，可以通过组件的$router获取到
 
+### 3、多级（嵌套）路由 
+&emsp;&emsp;1、多级路由规则使用children配置项
+```
+export default new vueRonter({
+    routes: [
+        {
+            path: '/about',
+            component: About
+        },
+        {
+            path: '/home',
+            component: Home,
+            children: [
+                {
+                    path: 'msg', //此处不要写/msg
+                    component: Msg
+                },
+                {
+                    path: 'news', //此处不要写/news
+                    component: News
+                },
+            ]
+        },
+        
+    ]
+})
+```
 
+&emsp;&emsp;2、跳转，需要写完成的链接
+```
+<router-link class="list-group-item"  to="/home/msg" active-class="active">Message</
+```
 
