@@ -2,47 +2,41 @@
  * @Author: wangyunfei
  * @Date: 2022-09-17 19:56:04
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-07 22:44:29
+ * @LastEditTime: 2022-10-08 02:17:02
  * @Description: file content
  * @FilePath: /vue_test/src/App.vue
 -->
 <template>
-  <div class="container" >
-    <Count></Count>
-    <Person></Person>
+  <div>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>Vue Router Demo</h2></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!-- <a href="#" class="list-group-item active">About</a>
+          <a href="#" class="list-group-item">Home</a> -->
+          <router-link class="list-group-item" active-class="active" to="/about">About</router-link>
+          <router-link class="list-group-item" active-class="active" to="/home">Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
-
-import Count from './components/Count.vue';
-import Person from './components/Person.vue';
-
 export default {
     name: "App",
-    components: { 
-      Count, 
-      Person
-    },
     
 }
 </script>
-
-<style scoped>
-  .container, .foot  {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  img {
-    width: 100%;
-  }
-  video {
-    width: 100%;
-  }
-  h4 {
-    text-align: center;
-  }
-  
-</style>

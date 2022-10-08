@@ -30,6 +30,8 @@
     - [5、getters使用](#5getters%E4%BD%BF%E7%94%A8)
     - [6、四个maps方法使用](#6%E5%9B%9B%E4%B8%AAmaps%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8)
     - [7、模块化+空间命名](#7%E6%A8%A1%E5%9D%97%E5%8C%96%E7%A9%BA%E9%97%B4%E5%91%BD%E5%90%8D)
+  - [路由](#%E8%B7%AF%E7%94%B1)
+    - [1.基本使用](#1%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -757,3 +759,46 @@ this.$store.commit('PersonOptions/ADD_PERSON', person)
 <!-- 方式二 借助mapActions读取-->
 ...mapMutations('PersonOptions', ['ADD_PERSON'])
 ```
+
+## 路由
+&emsp;&emsp;1、理解：一个路由（route）就是一组映射关系（key-value）多个路由需要由路由器来进行管理（router）
+&emsp;&emsp;2、前端路由： key是路径，value是组件
+
+### 1.基本使用
+&emsp;&emsp;1、 安装vue-router，命令```npm i vue-router```
+
+&emsp;&emsp;2、应用插件```Vue.use(router)```
+
+&emsp;&emsp;3、编写router配置项
+```
+import vueRonter from 'vue-router'
+
+import About from '../components/About'
+import Home from '../components/Home'
+
+export default new vueRonter({
+    routes: [
+        {
+            path: '/about',
+            component: About
+        },
+        {
+            path: '/home',
+            component: Home
+        }
+    ]
+})
+```
+
+&emsp;&emsp;4、实现切换（active-class可以配置高亮样式）
+```
+<router-link class="list-group-item" active-class="active" to="/home">Home</router-link>
+```
+
+&emsp;&emsp;5、指定展示位置
+```
+<router-view></router-view>
+```
+
+
+
