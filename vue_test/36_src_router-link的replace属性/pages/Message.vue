@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-10-08 14:38:18
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-09 22:04:26
+ * @LastEditTime: 2022-10-09 21:23:36
  * @Description: file content
  * @FilePath: /vue_test/src/pages/Message.vue
 -->
@@ -24,8 +24,6 @@
             }">
                 {{msg.title}}
             </router-link>&nbsp;&nbsp;
-            <button @click="pushShow(msg)">push查看</button>
-            <button @click="replaceShow(msg)">replace查看</button>
         </li>
     </ul>
     <hr>
@@ -45,28 +43,8 @@
                 ]
             }
         },
-        methods: {
-            pushShow(msg){
-                this.$router.push({
-                    name: 'detail',
-                    query: {
-                        id: msg.id,
-                        title: msg.title,
-                    }
-                })
-            },
-            replaceShow(msg){
-                this.$router.replace({
-                    name: 'detail',
-                    query: {
-                        id: msg.id,
-                        title: msg.title,
-                    }
-                })
-            },
-        },  
         mounted() {
-            console.log(this.$router);
+            console.log(this.$route);
         },
     }
 </script>

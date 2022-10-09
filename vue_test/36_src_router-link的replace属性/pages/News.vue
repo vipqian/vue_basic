@@ -2,15 +2,15 @@
  * @Author: wangyunfei
  * @Date: 2022-10-08 14:38:18
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-09 22:20:08
+ * @LastEditTime: 2022-10-08 14:40:11
  * @Description: file content
  * @FilePath: /vue_test/src/pages/News.vue
 -->
 <template>
     <ul>
-        <li>new1 <input type="text"></li>
-        <li>new2 <input type="text"></li>
-        <li>new3 <input type="text"></li>
+        <li>new1</li>
+        <li>new2</li>
+        <li>new3</li>
     </ul>
   </template>
   

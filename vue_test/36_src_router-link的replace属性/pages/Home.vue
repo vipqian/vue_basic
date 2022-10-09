@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-10-07 10:07:28
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-09 22:19:33
+ * @LastEditTime: 2022-10-08 14:44:58
  * @Description: file content
  * @FilePath: /vue_test/src/pages/Home.vue
 -->
@@ -18,9 +18,7 @@
           <router-link  class="list-group-item" to="/home/news" active-class="active">News</router-link>
         </li>
       </ul>
-      <keep-alive include="News">
-        <router-view></router-view>
-      </keep-alive>
+      <router-view></router-view>
     </div>
   </div>
 </template>

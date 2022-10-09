@@ -39,6 +39,8 @@
     - [6、路由的params参数](#6%E8%B7%AF%E7%94%B1%E7%9A%84params%E5%8F%82%E6%95%B0)
     - [7、路由的porps配置](#7%E8%B7%AF%E7%94%B1%E7%9A%84porps%E9%85%8D%E7%BD%AE)
     - [8、```<router-link>```的replace属性](#8router-link%E7%9A%84replace%E5%B1%9E%E6%80%A7)
+    - [9、编程式路由跳转](#9%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
+    - [10、缓存路由](#10%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -997,3 +999,38 @@ $route.params.title
    
 3. 如果开启replace模式：```<router-link replace ....>News</route-link>```
 
+### 9、编程式路由跳转
+1. 不借助```<router-link>```实现路由跳转，让路由跳转更加的灵活
+   
+2. 具体编码
+   ```
+   <!-- $router的2个api -->
+    this.$router.push({
+        name: 'detail',
+        query: {
+            id: msg.id,
+            title: msg.title,
+        }
+    })
+    this.$router.replace({
+        name: 'detail',
+        query: {
+            id: msg.id,
+            title: msg.title,
+        }
+    })
+    this.$router.back() //后退
+    this.$router.forward() // 前进
+    this.$router.go() //可前进也可后退，正数代表前进xx，负数代表后退xxx
+   ```
+
+### 10、缓存路由
+1. 作用：让不展示的路由组件保持挂载，不被销毁
+   
+2. 具体编码
+   ```
+   <!-- include的值代表不被销毁的组件名 -->
+   <keep-alive include="News">
+    <router-view></router-view>
+  </keep-alive>
+   ```
