@@ -38,6 +38,7 @@
     - [5、命名路由](#5%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)
     - [6、路由的params参数](#6%E8%B7%AF%E7%94%B1%E7%9A%84params%E5%8F%82%E6%95%B0)
     - [7、路由的porps配置](#7%E8%B7%AF%E7%94%B1%E7%9A%84porps%E9%85%8D%E7%BD%AE)
+    - [8、```<router-link>```的replace属性](#8router-link%E7%9A%84replace%E5%B1%9E%E6%80%A7)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -987,3 +988,12 @@ $route.params.title
   
 }
 ```
+
+### 8、```<router-link>```的replace属性
+
+1. 作用：控制路由跳转时浏览器历史记录的模式
+   
+2. 浏览器的历史记录有两种，push和replace，push是追加历史记录、replace是替换历史记录，路由跳转时默认使用的是push
+   
+3. 如果开启replace模式：```<router-link replace ....>News</route-link>```
+
