@@ -41,6 +41,7 @@
     - [8、```<router-link>```的replace属性](#8router-link%E7%9A%84replace%E5%B1%9E%E6%80%A7)
     - [9、编程式路由跳转](#9%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
     - [10、缓存路由](#10%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1)
+    - [11、两个新的生命周期钩子](#11%E4%B8%A4%E4%B8%AA%E6%96%B0%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1030,7 +1031,17 @@ $route.params.title
 2. 具体编码
    ```
    <!-- include的值代表不被销毁的组件名 -->
+   <!-- include的值的值为数组，代表缓存多个组件
+   <keep-alive :include=["News"]>
+    -->
    <keep-alive include="News">
     <router-view></router-view>
   </keep-alive>
    ```
+
+### 11、两个新的生命周期钩子
+1. 作用：路由组件所独有的2个钩子
+   
+2. 具体明名字
+   1. activated路由组件被激活时触发
+   2. deactivated路由组件被失活时触发
