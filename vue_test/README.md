@@ -34,6 +34,10 @@
     - [1.基本使用](#1%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
     - [2、几个注意点](#2%E5%87%A0%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9)
     - [3、多级（嵌套）路由](#3%E5%A4%9A%E7%BA%A7%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1)
+    - [4、路由的query参数](#4%E8%B7%AF%E7%94%B1%E7%9A%84query%E5%8F%82%E6%95%B0)
+    - [5、命名路由](#5%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1)
+    - [6、路由的params参数](#6%E8%B7%AF%E7%94%B1%E7%9A%84params%E5%8F%82%E6%95%B0)
+    - [7、路由的porps配置](#7%E8%B7%AF%E7%94%B1%E7%9A%84porps%E9%85%8D%E7%BD%AE)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -840,4 +844,146 @@ export default new vueRonter({
 ```
 <router-link class="list-group-item"  to="/home/msg" active-class="active">Message</
 ```
+### 4、路由的query参数
+&emsp;&emsp;1、传递参数
+```
+<!-- 跳转路由并携带query参数，to的字符串写法 -->
+router-link :to="`/home/msg/detail?id=${msg.id}&title=${msg.title}`">{{msg.title}}</router-link>&nbsp;&nbsp;
 
+<!-- 跳转路由并携带query参数，to的对象写法 -->
+<router-link 
+:to="{
+    path: '/home/msg/detail',
+    query: {
+        id: msg.id,
+        title: msg.title,
+    }
+}">
+    {{msg.title}}
+</router-link>&nbsp;&nbsp;
+```
+
+&emsp;&emsp;2、接收参数
+```
+$route.query.id
+$route.query.title
+```
+
+### 5、命名路由
+
+&emsp;&emsp;1、作用：可以简化路由跳转
+
+&emsp;&emsp;2、如果使用：
+&emsp;&emsp;&emsp;&emsp;1、给路由命名
+```
+{
+    path: 'msg',
+    component: Msg,
+    children: [
+        {
+            name: 'detail', //给路由命名
+            path: 'detail',
+            component: Detail,
+        }
+
+    ]
+},
+```
+&emsp;&emsp;&emsp;&emsp;2、简化跳转
+```
+<!-- 简化前路由 -->
+<router-link  class="list-group-item" to="/home/news" active-class="active">News</router-link>
+
+<!-- 简化后 -->
+<router-link  class="list-group-item" :to="{name: 'detail'}" active-class="active">News</router-link>
+<!-- 简化后,配合传参 -->
+<router-link 
+  :to="{
+      name: 'detail',
+      query: {
+          id: msg.id,
+          title: msg.title,
+      }
+  }">
+  {{msg.title}}
+  </router-link>
+
+```
+
+### 6、路由的params参数
+&emsp;&emsp;1、配置路由
+```
+{
+  path: '/home',
+  component: Home,
+  children: [
+      {
+          path: 'msg',
+          component: Msg,
+          children: [
+              {
+                  name: 'detail',
+                  path: 'detail/:id/:title', //使用占位符接收params参数
+                  component: Detail,
+              }
+
+          ]
+      },
+      {
+          path: 'news',
+          component: News
+      },
+  ]
+},
+```
+&emsp;&emsp;2、传递参数
+```
+<!-- 跳转路由并携带params参数，to的字符串写法 -->
+router-link :to="`/home/msg/detail/666/nihao">{{msg.title}}</router-link>&nbsp;&nbsp;
+
+<!-- 跳转路由并携带params参数，to的对象写法 -->
+<router-link 
+:to="{
+    path: '/home/msg/detail',
+    params: {
+        id: msg.id,
+        title: msg.title,
+    }
+}">
+    {{msg.title}}
+</router-link>&nbsp;&nbsp;
+```
+> $\textcolor{red}{特别注意：路由携带的params参数时，若使用to对象写法，则不能使用path配置项，必须使用name配置项}$
+
+&emsp;&emsp;3、接收参数
+```
+$route.params.id
+$route.params.title
+```
+
+### 7、路由的porps配置
+&emsp;&emsp;作用：让路由组件方便的传递参数
+```
+{
+  name: 'detail',
+  path: 'detail',
+  component: Detail,
+  // props的第一种写法，值为对象，该对象中所有的key-value都会以props的方式传递给Detail组件
+  // props: {
+  //     a: '1',
+  //     b: "hello"
+  // }
+
+  // props的第二种写法，值为布尔类型，若布尔类型为真，就会把路由组件中收到的所有的params参数以props的方式传递给Detail组件
+  // props: true
+
+  // props的第二种写法
+  props(router){
+      return {
+          id: router.query.id,
+          title: router.query.title,
+      }
+  }
+  
+}
+```
