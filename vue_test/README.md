@@ -42,6 +42,7 @@
     - [9、编程式路由跳转](#9%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
     - [10、缓存路由](#10%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1)
     - [11、两个新的生命周期钩子](#11%E4%B8%A4%E4%B8%AA%E6%96%B0%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90)
+    - [12、路由守卫](#12%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1045,3 +1046,36 @@ $route.params.title
 2. 具体明名字
    1. activated路由组件被激活时触发
    2. deactivated路由组件被失活时触发
+
+### 12、路由守卫
+
+1. 作用：对路由权限的控制
+   
+2. 分类：全局守卫、独享守卫、组件内守卫
+   
+3. 全局守卫
+   ```
+   // 全局前置路由守卫-初始化的时候被调用，每次路由切换之前被调用
+    router.beforeEach((to, from, next) => {
+        if(to.meta.isAuth){  //判断是否需要鉴权
+            console.log(to.name);
+            if (localStorage.getItem('school') == 'atguigu'){
+                next()
+            }
+            else{
+                alert('school is not atguigu')
+            }
+        }else{
+            next()
+        }
+    })
+
+    // 全局后置路由守卫-初始化的时候被调用，每次路由切换之后被调用
+    router.afterEach((to, from) => {
+        console.log(to, from);
+        document.title = to.name || 'index' //修改网页title
+    })
+
+   ```
+4. 独享守卫
+5. 组件内守卫

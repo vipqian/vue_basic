@@ -2,7 +2,7 @@
  * @Author: wangyunfei
  * @Date: 2022-10-08 02:04:19
  * @LastEditors: wangyunfei
- * @LastEditTime: 2022-10-09 21:26:58
+ * @LastEditTime: 2022-10-10 21:42:46
  * @Description: file content
  * @FilePath: /vue_test/src/ronter/index.js
  */
@@ -15,19 +15,25 @@ import Msg from '../pages/Message'
 import News from '../pages/News'
 import Detail from '../pages/Detail'
 
-export default new vueRonter({
+ const router = new vueRonter({
     routes: [
         {
+            name: 'about',
             path: '/about',
             component: About
         },
         {
+            name: 'home',
             path: '/home',
             component: Home,
             children: [
                 {
+                    name: 'msg',
                     path: 'msg',
                     component: Msg,
+                    meta:  {
+                        isAuth: true
+                    },
                     children: [
                         {
                             name: 'detail',
@@ -56,6 +62,7 @@ export default new vueRonter({
                     ]
                 },
                 {
+                    name: 'news',
                     path: 'news',
                     component: News
                 },
@@ -65,4 +72,27 @@ export default new vueRonter({
     ]
 })
 
+
+// 全局前置路由守卫-初始化的时候被调用，每次路由切换之前被调用
+router.beforeEach((to, from, next) => {
+    if(to.meta.isAuth){  //判断是否需要鉴权
+        console.log(to.name);
+        if (localStorage.getItem('school') == 'atguigu'){
+            next()
+        }
+        else{
+            alert('school is not atguigu')
+        }
+    }else{
+        next()
+    }
+})
+
+// 全局后置路由守卫-初始化的时候被调用，每次路由切换之后被调用
+router.afterEach((to, from) => {
+    console.log(to, from);
+    document.title = to.name || 'index' //修改网页title
+})
+
+export default router
 
