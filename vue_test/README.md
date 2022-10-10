@@ -1077,5 +1077,32 @@ $route.params.title
     })
 
    ```
+  
 4. 独享守卫
+  ```
+  <!-- 只有前置 -->
+  beforeEnter(to, from, next) {
+      if(to.meta.isAuth){  //判断是否需要鉴权
+          console.log(to.name);
+          if (localStorage.getItem('school') == 'atguigu'){
+              next()
+          }
+          else{
+              alert('school is not atguigu')
+          }
+      }else{
+          next()
+      }
+  },
+  ```
 5. 组件内守卫
+   ```
+   // 通过路由规则，进入到组件时被调用
+    beforeRouteEnter (to, from, next) {
+      // ...
+    },
+    // 通过路由规则，离开到组件时被调用
+    beforeRouteLeave (to, from, next) {
+      // ...
+    }
+   ```
